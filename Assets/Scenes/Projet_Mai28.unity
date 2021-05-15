@@ -15306,6 +15306,7 @@ GameObject:
   - component: {fileID: 855645293}
   - component: {fileID: 855645292}
   - component: {fileID: 855645294}
+  - component: {fileID: 855645295}
   m_Layer: 0
   m_Name: 'Idle '
   m_TagString: Untagged
@@ -15460,6 +15461,18 @@ MonoBehaviour:
   jump: 5
   rollForce: 0
   RaycastStartTransform: {fileID: 0}
+--- !u!114 &855645295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855645288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081d44c880633b64fa849edd268f6f8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &895179683
 GameObject:
   m_ObjectHideFlags: 0

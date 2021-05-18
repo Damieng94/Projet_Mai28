@@ -19,7 +19,7 @@ public class @Controls : IInputActionCollection, IDisposable
             ""id"": ""e10f0591-c73d-4ca8-9c1f-1f242b636bf2"",
             ""actions"": [
                 {
-                    ""name"": ""Space"",
+                    ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""8414cc8d-a9c0-40f1-b0b2-cbeaffaae25f"",
                     ""expectedControlType"": ""Button"",
@@ -27,7 +27,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""LeftRight"",
+                    ""name"": ""MoveLR"",
                     ""type"": ""Button"",
                     ""id"": ""feb2b08b-ff77-435a-a443-03caa7b00008"",
                     ""expectedControlType"": ""Button"",
@@ -43,7 +43,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Space"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -54,7 +54,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LeftRight"",
+                    ""action"": ""MoveLR"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -65,7 +65,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LeftRight"",
+                    ""action"": ""MoveLR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -76,7 +76,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LeftRight"",
+                    ""action"": ""MoveLR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -87,8 +87,8 @@ public class @Controls : IInputActionCollection, IDisposable
 }");
         // Deplacement
         m_Deplacement = asset.FindActionMap("Deplacement", throwIfNotFound: true);
-        m_Deplacement_Space = m_Deplacement.FindAction("Space", throwIfNotFound: true);
-        m_Deplacement_LeftRight = m_Deplacement.FindAction("LeftRight", throwIfNotFound: true);
+        m_Deplacement_Jump = m_Deplacement.FindAction("Jump", throwIfNotFound: true);
+        m_Deplacement_MoveLR = m_Deplacement.FindAction("MoveLR", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -138,14 +138,14 @@ public class @Controls : IInputActionCollection, IDisposable
     // Deplacement
     private readonly InputActionMap m_Deplacement;
     private IDeplacementActions m_DeplacementActionsCallbackInterface;
-    private readonly InputAction m_Deplacement_Space;
-    private readonly InputAction m_Deplacement_LeftRight;
+    private readonly InputAction m_Deplacement_Jump;
+    private readonly InputAction m_Deplacement_MoveLR;
     public struct DeplacementActions
     {
         private @Controls m_Wrapper;
         public DeplacementActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Space => m_Wrapper.m_Deplacement_Space;
-        public InputAction @LeftRight => m_Wrapper.m_Deplacement_LeftRight;
+        public InputAction @Jump => m_Wrapper.m_Deplacement_Jump;
+        public InputAction @MoveLR => m_Wrapper.m_Deplacement_MoveLR;
         public InputActionMap Get() { return m_Wrapper.m_Deplacement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -155,29 +155,29 @@ public class @Controls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_DeplacementActionsCallbackInterface != null)
             {
-                @Space.started -= m_Wrapper.m_DeplacementActionsCallbackInterface.OnSpace;
-                @Space.performed -= m_Wrapper.m_DeplacementActionsCallbackInterface.OnSpace;
-                @Space.canceled -= m_Wrapper.m_DeplacementActionsCallbackInterface.OnSpace;
-                @LeftRight.started -= m_Wrapper.m_DeplacementActionsCallbackInterface.OnLeftRight;
-                @LeftRight.performed -= m_Wrapper.m_DeplacementActionsCallbackInterface.OnLeftRight;
-                @LeftRight.canceled -= m_Wrapper.m_DeplacementActionsCallbackInterface.OnLeftRight;
+                @Jump.started -= m_Wrapper.m_DeplacementActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_DeplacementActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_DeplacementActionsCallbackInterface.OnJump;
+                @MoveLR.started -= m_Wrapper.m_DeplacementActionsCallbackInterface.OnMoveLR;
+                @MoveLR.performed -= m_Wrapper.m_DeplacementActionsCallbackInterface.OnMoveLR;
+                @MoveLR.canceled -= m_Wrapper.m_DeplacementActionsCallbackInterface.OnMoveLR;
             }
             m_Wrapper.m_DeplacementActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Space.started += instance.OnSpace;
-                @Space.performed += instance.OnSpace;
-                @Space.canceled += instance.OnSpace;
-                @LeftRight.started += instance.OnLeftRight;
-                @LeftRight.performed += instance.OnLeftRight;
-                @LeftRight.canceled += instance.OnLeftRight;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
+                @MoveLR.started += instance.OnMoveLR;
+                @MoveLR.performed += instance.OnMoveLR;
+                @MoveLR.canceled += instance.OnMoveLR;
             }
         }
     }
     public DeplacementActions @Deplacement => new DeplacementActions(this);
     public interface IDeplacementActions
     {
-        void OnSpace(InputAction.CallbackContext context);
-        void OnLeftRight(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnMoveLR(InputAction.CallbackContext context);
     }
 }

@@ -24,9 +24,9 @@ public class Player : MonoBehaviour
     {
         controls = new Controls();
         controls.Enable();
-        controls.Deplacement.LeftRight.performed += LeftRight;
-        controls.Deplacement.Space.performed += Space;
-        controls.Deplacement.LeftRight.canceled += LeftRightCanceled;
+        controls.Deplacement.MoveLR.performed += MoveLRperformed;
+        controls.Deplacement.Jump.performed += Jumpperformed;
+        controls.Deplacement.MoveLR.canceled += MoveLRcanceled;
     }
 
     private void LeftRightCanceled(InputAction.CallbackContext obj)
@@ -51,10 +51,15 @@ public class Player : MonoBehaviour
     {
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        spriterenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void Space(InputAction.CallbackContext obj)
+    private void Jumpperformed(InputAction.CallbackContext obj)
     {
-        rb2D.gravityScale *= -1;
+        if (canJump)
+        {
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            canJump = false;
+        }
     }
 }

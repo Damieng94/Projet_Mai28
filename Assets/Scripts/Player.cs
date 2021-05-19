@@ -6,11 +6,12 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float speed;
+    [SerializeField] private float maxspeed;
     [SerializeField] private float jump;
-    [SerializeField] private Transform RaycastStartTransform;
+    //[SerializeField] private Transform RaycastStartTransform;
 
     private SpriteRenderer spriterenderer;
-    
+
     private Animator animator;
 
     private Rigidbody2D rb2D;
@@ -28,11 +29,6 @@ public class Player : MonoBehaviour
         controls.Deplacement.MoveLR.performed += MoveLRperformed;
         controls.Deplacement.Jump.performed += Jumpperformed;
         controls.Deplacement.MoveLR.canceled += MoveLRcanceled;
-    }
-
-    private void LeftRightCanceled(InputAction.CallbackContext obj)
-    {
-        direction = 0;
     }
 
     private void MoveLRperformed(InputAction.CallbackContext obj)
@@ -59,13 +55,24 @@ public class Player : MonoBehaviour
     {
         if (canJump)
         {
-           rb2D.AddForce(new Vector2(0, jump), ForceMode2D.Impulse);
-           canJump = false;
+            rb2D.AddForce(new Vector2(0, jump), ForceMode2D.Impulse);
+            canJump = false;
         }
     }
 
-    private void MoveLRcanceled (InputAction.CallbackContext obj)
+    private void MoveLRcanceled(InputAction.CallbackContext obj)
     {
         direction = 0;
+    }
+
+    private void FixedUpdate()
+    {
+        var horizontalSpeed = Mathf.Abs(rb2D.velocity.x);
+        if (horizontalSpeed < maxspeed)
+        {
+            rb2D.AddForce(new Vector2(speed * direction, 0));
+        }
+        
+        
     }
 }

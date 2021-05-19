@@ -6,7 +6,7 @@
             "id": "e10f0591-c73d-4ca8-9c1f-1f242b636bf2",
             "actions": [
                 {
-                    "name": "Space",
+                    "name": "Jump",
                     "type": "Button",
                     "id": "8414cc8d-a9c0-40f1-b0b2-cbeaffaae25f",
                     "expectedControlType": "Button",
@@ -14,7 +14,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "LeftRight",
+                    "name": "MoveLR",
                     "type": "Button",
                     "id": "feb2b08b-ff77-435a-a443-03caa7b00008",
                     "expectedControlType": "Button",
@@ -30,7 +30,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Space",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -41,7 +41,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftRight",
+                    "action": "MoveLR",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -52,7 +52,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftRight",
+                    "action": "MoveLR",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -63,7 +63,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftRight",
+                    "action": "MoveLR",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

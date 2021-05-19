@@ -6,12 +6,12 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float speed;
+    [SerializeField] private float maxspeed;
     [SerializeField] private float jump;
-    [SerializeField] private float rollForce;
-    [SerializeField] private Transform RaycastStartTransform;
+    //[SerializeField] private Transform RaycastStartTransform;
 
     private SpriteRenderer spriterenderer;
-    
+
     private Animator animator;
 
     private Rigidbody2D rb2D;
@@ -20,21 +20,18 @@ public class Player : MonoBehaviour
 
     private float direction;
 
+    private bool canJump = false;
+
     private void OnEnable()
     {
         controls = new Controls();
         controls.Enable();
-        controls.Deplacement.LeftRight.performed += LeftRight;
-        controls.Deplacement.Space.performed += Space;
-        controls.Deplacement.LeftRight.canceled += LeftRightCanceled;
+        controls.Deplacement.MoveLR.performed += MoveLRperformed;
+        controls.Deplacement.Jump.performed += Jumpperformed;
+        controls.Deplacement.MoveLR.canceled += MoveLRcanceled;
     }
 
-    private void LeftRightCanceled(InputAction.CallbackContext obj)
-    {
-        direction = 0;
-    }
-
-    private void LeftRight(InputAction.CallbackContext obj)
+    private void MoveLRperformed(InputAction.CallbackContext obj)
     {
         direction = obj.ReadValue<float>();
         if (direction > 0)
@@ -51,10 +48,31 @@ public class Player : MonoBehaviour
     {
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        spriterenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void Space(InputAction.CallbackContext obj)
+    private void Jumpperformed(InputAction.CallbackContext obj)
     {
-        rb2D.gravityScale *= -1;
+        if (canJump)
+        {
+            rb2D.AddForce(new Vector2(0, jump), ForceMode2D.Impulse);
+            canJump = false;
+        }
+    }
+
+    private void MoveLRcanceled(InputAction.CallbackContext obj)
+    {
+        direction = 0;
+    }
+
+    private void FixedUpdate()
+    {
+        var horizontalSpeed = Mathf.Abs(rb2D.velocity.x);
+        if (horizontalSpeed < maxspeed)
+        {
+            rb2D.AddForce(new Vector2(speed * direction, 0));
+        }
+        
+        
     }
 }

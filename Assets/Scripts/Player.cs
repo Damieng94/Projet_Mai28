@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float jump;
-    [SerializeField] private float rollForce;
     [SerializeField] private Transform RaycastStartTransform;
 
     private SpriteRenderer spriterenderer;
@@ -19,6 +18,8 @@ public class Player : MonoBehaviour
     private Controls controls;
 
     private float direction;
+
+    private bool canJump = false;
 
     private void OnEnable()
     {
@@ -34,7 +35,7 @@ public class Player : MonoBehaviour
         direction = 0;
     }
 
-    private void LeftRight(InputAction.CallbackContext obj)
+    private void MoveLRperformed(InputAction.CallbackContext obj)
     {
         direction = obj.ReadValue<float>();
         if (direction > 0)
@@ -58,8 +59,13 @@ public class Player : MonoBehaviour
     {
         if (canJump)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-            canJump = false;
+           rb2D.AddForce(new Vector2(0, jump), ForceMode2D.Impulse);
+           canJump = false;
         }
+    }
+
+    private void MoveLRcanceled (InputAction.CallbackContext obj)
+    {
+        direction = 0;
     }
 }

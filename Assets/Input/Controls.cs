@@ -28,9 +28,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""MoveLR"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""feb2b08b-ff77-435a-a443-03caa7b00008"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
                 }

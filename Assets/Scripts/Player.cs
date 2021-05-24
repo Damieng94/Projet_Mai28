@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxspeed;
     [SerializeField] private float jump;
     [SerializeField] private Transform raycaststart;
-    [SerializeField] private LayerMask raycastMask;
 
     private SpriteRenderer spriterenderer;
 
@@ -56,8 +55,16 @@ public class Player : MonoBehaviour
 
     private void Jumpperformed(InputAction.CallbackContext obj)
     {
-        if (Physics2D.Raycast(raycaststart.position, raycastDirection, 0.1f, raycastMask));
+        if (Physics2D.Raycast(raycaststart.position, raycastDirection, 0.1f))
+        {
             rb2D.AddForce(jump * transform.up, ForceMode2D.Impulse);
+
+
+
+        }
+        
+
+
     }
 
     private void MoveLRcanceled(InputAction.CallbackContext obj)
@@ -71,8 +78,6 @@ public class Player : MonoBehaviour
         if (horizontalSpeed < maxspeed)
         {
             rb2D.AddForce(new Vector2(speed * direction, 0));
-        }
-
-        
+        }        
     }
 }

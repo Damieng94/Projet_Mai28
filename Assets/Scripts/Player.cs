@@ -10,6 +10,10 @@ public class Player : MonoBehaviour
     [SerializeField] private float jump;
     [SerializeField] private Transform raycaststart;
 
+    [SerializeField] private GameObject jour;
+
+    [SerializeField] private GameObject nuit;
+
     private SpriteRenderer spriterenderer;
 
     private Animator animator;
@@ -59,9 +63,20 @@ public class Player : MonoBehaviour
         {
             rb2D.AddForce(jump * transform.up, ForceMode2D.Impulse);
 
-
-
+            if (jour.activeSelf == true)
+            {
+                nuit.SetActive(true);
+                jour.SetActive(false);
+            }
+            else
+            {
+                nuit.SetActive(false);
+                jour.SetActive(true);
+            }
         }
+
+        
+
         
 
 

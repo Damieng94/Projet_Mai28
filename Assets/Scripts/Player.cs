@@ -74,12 +74,6 @@ public class Player : MonoBehaviour
                 jour.SetActive(true);
             }
         }
-
-        
-
-        
-
-
     }
 
     private void MoveLRcanceled(InputAction.CallbackContext obj)

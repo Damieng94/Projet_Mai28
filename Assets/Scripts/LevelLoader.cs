@@ -3,13 +3,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelLoader : MonoBehaviour
+public class LevelLoader : MonoBehaviour //LoadingScreen
 {
 
     public GameObject loadingScreen;
     public Slider slider;
 
-    public void LoadLevel(int sceneIndex)
+    public void LoadLevel(int sceneIndex) 
     {
         StartCoroutine(LoadAsync(sceneIndex));       
     }
@@ -32,3 +32,4 @@ public class LevelLoader : MonoBehaviour
 }
 
     
+//Ne sais pas si il faut s'attarder sur ce script ? (responsabilité unique par classe)

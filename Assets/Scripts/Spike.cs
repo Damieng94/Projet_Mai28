@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-public class Spike : MonoBehaviour
+public class Spike : MonoBehaviour  //Contient collision piques avec spawnposition pour le player
 {
     [SerializeField] Transform SpawnPoint;
     private void OnCollisionEnter2D(Collision2D collision)
